@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Đăng nhập</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="window">
+    <div class="titlebar">
+      <div class="red"></div>
+      <div class="yellow"></div>
+      <div class="green"></div>
+    </div>
+    <h2>🔐 Đăng nhập hệ thống</h2>
+    <form id="loginForm">
+      <input type="text" id="username" placeholder="Tên đăng nhập" required>
+      <input type="password" id="password" placeholder="Mật khẩu" required>
+      <button type="submit">Đăng nhập</button>
+    </form>
+    <p id="error" style="color:#ff3b30;text-align:center;"></p>
+  </div>
+
+  <script>
+    // Danh sách user demo (mô phỏng DB)
+    const users = [
+      { username: "admin", password: "123", role: "admin" },
+      { username: "user1", password: "123", role: "user" }
+    ];
+
+    document.getElementById("loginForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const u = document.getElementById("username").value.trim();
+      const p = document.getElementById("password").value.trim();
+      const found = users.find(x => x.username === u && x.password === p);
+
+      if (!found) {
+        document.getElementById("error").textContent = "Sai tài khoản hoặc mật khẩu!";
+        return;
+      }
+
+      // Lưu role vào localStorage để trang khác biết
+      localStorage.setItem("username", found.username);
+      localStorage.setItem("role", found.role);
+
+      // Chuyển hướng
+      if (found.role === "admin") {
+        window.location.href = "admin.html";
+      } else {
+        window.location.href = "business.html";
+      }
+    });
+  </script>
+</body>
+</html>

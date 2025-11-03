@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Trang nghiệp vụ</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="window">
+    <div class="titlebar">
+      <div class="red"></div>
+      <div class="yellow"></div>
+      <div class="green"></div>
+    </div>
+    <h2>🧭 Trang nghiệp vụ</h2>
+    <p>Xin chào, <span id="userName"></span> | <a href="#" id="logout">Đăng xuất</a></p>
+
+    <h3>Nội dung nghiệp vụ</h3>
+    <p>Đây là trang mô phỏng khu vực người dùng thao tác các nghiệp vụ (ví dụ: nhập đơn, tạo báo cáo...)</p>
+  </div>
+
+  <script>
+    const role = localStorage.getItem("role");
+    if (!role) window.location.href = "index.html";
+    if (role === "admin") window.location.href = "admin.html";
+
+    document.getElementById("userName").textContent = localStorage.getItem("username");
+
+    document.getElementById("logout").onclick = function() {
+      localStorage.clear();
+      window.location.href = "index.html";
+    }
+  </script>
+</body>
+</html>
